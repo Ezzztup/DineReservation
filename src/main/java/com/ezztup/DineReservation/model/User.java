@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "Users")
@@ -26,6 +30,17 @@ public class User {
 
     @Column(nullable = false)
     private String last_name;
+
+    @Column(nullable = false)
+    private String password;
+
+    @CreationTimestamp
+    @Column(updatable = false, name = "created_at")
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
