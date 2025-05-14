@@ -1,0 +1,21 @@
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+INSERT INTO roles (id, name) VALUES
+    (1, 'ADMIN'),
+    (2, 'MERCHANT'),
+    (3, 'CUSTOMER');
+
+CREATE TABLE users(
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    role_id INTEGER NOT NULL DEFAULT 3,
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id)
+);
